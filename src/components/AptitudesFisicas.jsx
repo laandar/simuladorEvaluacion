@@ -43,6 +43,7 @@ const AptitudesFisicas = ({
                         onChange={(e) => handleAptitudesFisicasChange(item.id, 'evaluacion', e.target.value)}
                         className="evaluacion-select"
                       >
+                        <option value="">Seleccione una opción</option>
                         {opcionesEvaluacion.map(opcion => (
                           <option key={opcion.valor} value={opcion.valor}>
                             {opcion.valor}
@@ -58,7 +59,7 @@ const AptitudesFisicas = ({
                   <td className="datos-cell combined-cell" colSpan="2">
                     <input
                       type="number"
-                      value={item.evaluacion}
+                      value={item.evaluacion || ''}
                       onChange={(e) => handleAptitudesFisicasChange(item.id, 'evaluacion', e.target.value)}
                       min="0"
                       step="0.01"

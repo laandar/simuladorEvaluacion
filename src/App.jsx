@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import ResultadosGestion from './components/ResultadosGestion'
 import FormacionProfesional from './components/FormacionProfesional'
@@ -10,30 +10,45 @@ import { calcularNotasResponsabilidad, calcularTotalResponsabilidad, calcularPun
 
 function App() {
   const [pasoActual, setPasoActual] = useState(1);
+  const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+
+  // Controlar el scroll del body cuando el menú móvil está abierto
+  useEffect(() => {
+    if (menuMobileOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+    
+    // Cleanup al desmontar el componente
+    return () => {
+      document.body.classList.remove('menu-open');
+    };
+  }, [menuMobileOpen]);
   const [indicadores, setIndicadores] = useState([
-    { id: 1, nombre: 'Abandono de servicio sin autorización', datos: 0, nota: 0 },
-    { id: 2, nombre: 'Acuerdo conciliatorio', datos: 0, nota: 0 },
-    { id: 3, nombre: 'Acuerdo conciliatorio no cumplido', datos: 0, nota: 0 },
-    { id: 4, nombre: 'Agresiones a servidores policiales (autor)', datos: 0, nota: 0 },
-    { id: 5, nombre: 'Aprehensión', datos: 0, nota: 0 },
-    { id: 6, nombre: 'Ausencia injustificada', datos: 0, nota: 0 },
-    { id: 7, nombre: 'Consumo de bebidas alcohólicas', datos: 0, nota: 0 },
-    { id: 8, nombre: 'Contravención de tránsito con vehículo policial asignado', datos: 0, nota: 0 },
-    { id: 9, nombre: 'Control y cuidado de equipo en dotación', datos: 0, nota: 0 },
-    { id: 10, nombre: 'Control y cuidado de infraestructura policial', datos: 0, nota: 0 },
-    { id: 11, nombre: 'Cumplimiento de actividad des en el siipne', datos: 0, nota: 0 },
-    { id: 12, nombre: 'Detención', datos: 0, nota: 0 },
-    { id: 13, nombre: 'Días laborados (365-)', datos: 0, nota: 0 },
-    { id: 14, nombre: 'Impedimento de ejercicio profesional', datos: 0, nota: 0 },
-    { id: 15, nombre: 'Imposibilidad de acuerdo', datos: 0, nota: 0 },
-    { id: 16, nombre: 'Imposibilidad de acuerdos documento', datos: 0, nota: 0 },
-    { id: 17, nombre: 'Incumplimiento de horario de trabajo', datos: 0, nota: 0 },
-    { id: 18, nombre: 'Manejo responsable de redes sociales', datos: 0, nota: 0 },
-    { id: 19, nombre: 'Medida cautelar', datos: 0, nota: 0 },
-    { id: 20, nombre: 'Medida especial administrativa', datos: 0, nota: 0 },
-    { id: 21, nombre: 'Medidas de protección', datos: 0, nota: 0 },
-    { id: 22, nombre: 'Permisos', datos: 0, nota: 0 },
-    { id: 23, nombre: 'Violencia intrafamiliar', datos: 0, nota: 0 }
+    { id: 1, nombre: 'Abandono de servicio sin autorización', datos: '', nota: 0 },
+    { id: 2, nombre: 'Acuerdo conciliatorio', datos: '', nota: 0 },
+    { id: 3, nombre: 'Acuerdo conciliatorio no cumplido', datos: '', nota: 0 },
+    { id: 4, nombre: 'Agresiones a servidores policiales (autor)', datos: '', nota: 0 },
+    { id: 5, nombre: 'Aprehensión', datos: '', nota: 0 },
+    { id: 6, nombre: 'Ausencia injustificada', datos: '', nota: 0 },
+    { id: 7, nombre: 'Consumo de bebidas alcohólicas', datos: '', nota: 0 },
+    { id: 8, nombre: 'Contravención de tránsito con vehículo policial asignado', datos: '', nota: 0 },
+    { id: 9, nombre: 'Control y cuidado de equipo en dotación', datos: '', nota: 0 },
+    { id: 10, nombre: 'Control y cuidado de infraestructura policial', datos: '', nota: 0 },
+    { id: 11, nombre: 'Cumplimiento de actividad des en el siipne', datos: '', nota: 0 },
+    { id: 12, nombre: 'Detención', datos: '', nota: 0 },
+    { id: 13, nombre: 'Días laborados (365-)', datos: '', nota: 0 },
+    { id: 14, nombre: 'Impedimento de ejercicio profesional', datos: '', nota: 0 },
+    { id: 15, nombre: 'Imposibilidad de acuerdo', datos: '', nota: 0 },
+    { id: 16, nombre: 'Imposibilidad de acuerdos documento', datos: '', nota: 0 },
+    { id: 17, nombre: 'Incumplimiento de horario de trabajo', datos: '', nota: 0 },
+    { id: 18, nombre: 'Manejo responsable de redes sociales', datos: '', nota: 0 },
+    { id: 19, nombre: 'Medida cautelar', datos: '', nota: 0 },
+    { id: 20, nombre: 'Medida especial administrativa', datos: '', nota: 0 },
+    { id: 21, nombre: 'Medidas de protección', datos: '', nota: 0 },
+    { id: 22, nombre: 'Permisos', datos: '', nota: 0 },
+    { id: 23, nombre: 'Violencia intrafamiliar', datos: '', nota: 0 }
   ]);
 
   const [rendimientoIndividual, setRendimientoIndividual] = useState([
@@ -45,20 +60,20 @@ function App() {
   ]);
 
   const [gestionColectiva, setGestionColectiva] = useState([
-    { id: 1, indicador: 'SPR - Gestión de la unidad', datos: 0, nota: 0 },
-    { id: 2, indicador: 'SPR - Gestión de la información', datos: 0, nota: 0 }
+    { id: 1, indicador: 'SPR - Gestión de la unidad', datos: '', nota: 0 },
+    { id: 2, indicador: 'SPR - Gestión de la información', datos: '', nota: 0 }
   ]);
 
   const [formacionProfesional, setFormacionProfesional] = useState([
-    { id: 1, indicador: 'PCIC', datos: 0, nota: 0 }
+    { id: 1, indicador: 'PCIC', datos: '', nota: 0 }
   ]);
 
   const [normasDisciplinarias, setNormasDisciplinarias] = useState([
-    { id: 1, indicador: 'Amonestación verbal', datos: 0, nota: 0 },
-    { id: 2, indicador: 'Amonestación escrita', datos: 0, nota: 0 },
-    { id: 3, indicador: 'Sanción pecuniaria menor', datos: 0, nota: 0 },
-    { id: 4, indicador: 'Sanción pecuniaria mayor', datos: 0, nota: 0 },
-    { id: 5, indicador: 'Suspensión de funciones', datos: 0, nota: 0 }
+    { id: 1, indicador: 'Amonestación verbal', datos: '', nota: 0 },
+    { id: 2, indicador: 'Amonestación escrita', datos: '', nota: 0 },
+    { id: 3, indicador: 'Sanción pecuniaria menor', datos: '', nota: 0 },
+    { id: 4, indicador: 'Sanción pecuniaria mayor', datos: '', nota: 0 },
+    { id: 5, indicador: 'Suspensión de funciones', datos: '', nota: 0 }
   ]);
 
   const [aptitudesFisicas, setAptitudesFisicas] = useState([
@@ -78,14 +93,14 @@ function App() {
   ]);
 
   const [incentivos, setIncentivos] = useState([
-    { id: 1, indicador: 'Actuaciones relevantes', cantidad: 0, puntuacion: 0 },
-    { id: 2, indicador: 'Condecoraciones', cantidad: 0, puntuacion: 0 },
-    { id: 3, indicador: 'Felicitaciones', cantidad: 0, puntuacion: 0 },
-    { id: 4, indicador: 'Territorios priorizados', cantidad: 0, puntuacion: 0 },
-    { id: 5, indicador: 'Titulos', cantidad: 0, puntuacion: 0 },
-    { id: 6, indicador: 'Unidades de contingencia fronteriza', cantidad: 0, puntuacion: 0 },
-    { id: 7, indicador: 'Unidades de contingencia penitenciaria', cantidad: 0, puntuacion: 0 },
-    { id: 8, indicador: 'Zonas de dificil acceso', cantidad: 0, puntuacion: 0 }
+    { id: 1, indicador: 'Actuaciones relevantes', cantidad: '', puntuacion: 0 },
+    { id: 2, indicador: 'Condecoraciones', cantidad: '', puntuacion: 0 },
+    { id: 3, indicador: 'Felicitaciones', cantidad: '', puntuacion: 0 },
+    { id: 4, indicador: 'Territorios priorizados', cantidad: '', puntuacion: 0 },
+    { id: 5, indicador: 'Titulos', cantidad: '', puntuacion: 0 },
+    { id: 6, indicador: 'Unidades de contingencia fronteriza', cantidad: '', puntuacion: 0 },
+    { id: 7, indicador: 'Unidades de contingencia penitenciaria', cantidad: '', puntuacion: 0 },
+    { id: 8, indicador: 'Zonas de dificil acceso', cantidad: '', puntuacion: 0 }
   ]);
 
   const opcionesEvaluacion = [
@@ -100,27 +115,14 @@ function App() {
   const handleDatosChange = (id, value) => {
     const newIndicadores = indicadores.map(ind => {
       if (ind.id === id) {
-        const datos = parseInt(value) || 0;
+        const datos = value === '' ? '' : parseInt(value) || 0;
         const nota = calcularNotasResponsabilidad(id, datos, indicadores);
         return { ...ind, datos, nota };
       }
       return ind;
     });
     
-    // Si se cambió el valor de infraestructura policial (id: 10), recalcular equipo en dotación (id: 9)
-    if (id === 10) {
-      const updatedIndicadores = newIndicadores.map(ind => {
-        if (ind.id === 9) {
-          const infraestructuraValue = parseInt(value) || 0;
-          const nota = calcularNotasResponsabilidad(9, infraestructuraValue, newIndicadores);
-          return { ...ind, nota };
-        }
-        return ind;
-      });
-      setIndicadores(updatedIndicadores);
-    } else {
     setIndicadores(newIndicadores);
-    }
   };
 
   const handleEvaluacionChange = (id, evaluacion) => {
@@ -261,6 +263,15 @@ function App() {
 
   const irAPaso = (paso) => {
     setPasoActual(paso);
+    setMenuMobileOpen(false);
+  };
+
+  const toggleMenuMobile = () => {
+    setMenuMobileOpen(!menuMobileOpen);
+  };
+
+  const cerrarMenuMobile = () => {
+    setMenuMobileOpen(false);
   };
 
   const renderPaso = () => {
@@ -346,6 +357,27 @@ function App() {
 
   return (
     <div className="app">
+      {/* Botón menú hamburguesa para móviles */}
+      <button 
+        className={`mobile-menu-btn ${menuMobileOpen ? 'active' : ''}`}
+        onClick={toggleMenuMobile}
+        aria-label="Menú de navegación"
+        title="Abrir menú de navegación"
+      >
+        <div className="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="menu-btn-text">Menú</div>
+      </button>
+
+      {/* Overlay para cerrar menú en móviles */}
+      <div 
+        className={`mobile-overlay ${menuMobileOpen ? 'active' : ''}`}
+        onClick={cerrarMenuMobile}
+      ></div>
+
       <div className="institutional-header">
         <div className="header-content">
           <div className="logo-section">
@@ -363,7 +395,7 @@ function App() {
       <div className="main-content">
         <div className="content-layout">
           {/* Navegación del Wizard - Lado Izquierdo */}
-          <div className="wizard-sidebar">
+          <div className={`wizard-sidebar ${menuMobileOpen ? 'mobile-open' : ''}`}>
             <h2>Progreso de Evaluación</h2>
             <div className="wizard-navigation">
         {pasos.map((paso) => (

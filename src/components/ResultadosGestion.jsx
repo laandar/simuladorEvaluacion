@@ -42,7 +42,7 @@ const ResultadosGestion = ({
                   <td className="datos-cell">
                     <input
                       type="number"
-                      value={indicador.datos}
+                      value={indicador.datos || ''}
                       onChange={(e) => handleDatosChange(indicador.id, e.target.value)}
                       min="0"
                     />
@@ -88,6 +88,7 @@ const ResultadosGestion = ({
                       onChange={(e) => handleEvaluacionChange(item.id, e.target.value)}
                       className="evaluacion-select"
                     >
+                      <option value="">Seleccione una opción</option>
                       {opcionesEvaluacion.map(opcion => (
                         <option key={opcion.valor} value={opcion.valor}>
                           {opcion.valor}
@@ -134,7 +135,7 @@ const ResultadosGestion = ({
                   <td className="datos-cell">
                     <input
                       type="number"
-                      value={item.datos}
+                      value={item.datos || ''}
                       onChange={(e) => handleGestionColectivaChange(item.id, 'datos', e.target.value)}
                       min="0"
                       step="0.01"

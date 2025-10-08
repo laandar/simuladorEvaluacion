@@ -32,7 +32,7 @@ const FormacionProfesional = ({
                 <td className="datos-cell">
                   <input
                     type="number"
-                    value={item.datos}
+                    value={item.datos || ''}
                     onChange={(e) => handleFormacionProfesionalChange(item.id, 'datos', e.target.value)}
                     min="0"
                     step="0.01"

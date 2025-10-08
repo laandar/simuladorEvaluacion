@@ -5,6 +5,23 @@
   font-family: Arial, sans-serif;
 }
 
+/* Prevenir scroll cuando el menú móvil está abierto */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Regla global: Ocultar flechas de incremento/decremento en todos los inputs numéricos */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .app h1 {
   text-align: center;
   color: #333;
@@ -33,6 +50,26 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Estilos para el scrollbar de las tablas */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .evaluation-table {
@@ -144,6 +181,18 @@
   box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2);
 }
 
+/* Ocultar flechas de incremento/decremento en inputs numéricos */
+.datos-cell input[type="number"]::-webkit-inner-spin-button,
+.datos-cell input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.datos-cell input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .nota-cell {
   text-align: center;
   font-weight: bold;
@@ -234,6 +283,18 @@
   text-align: center;
 }
 
+/* Ocultar flechas de incremento/decremento en inputs numéricos */
+.evaluation-input[type="number"]::-webkit-inner-spin-button,
+.evaluation-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.evaluation-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .separator {
   color: #6b7280;
   font-weight: bold;
@@ -263,6 +324,31 @@
   outline: none;
   border-color: #1e40af;
   box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2);
+}
+
+/* Ocultar flechas de incremento/decremento en inputs numéricos */
+.single-input[type="number"]::-webkit-inner-spin-button,
+.single-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.single-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Estilos para notas bajo las tablas */
+.table-note {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #f0f4f8;
+  border-left: 4px solid #1e40af;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e40af;
+  text-align: center;
 }
 
 /* Estilos para subsecciones */
@@ -735,11 +821,15 @@
   font-weight: bold;
 }
 
-/* Responsive */
+/* Responsive para el reporte ejecutivo */
 @media (max-width: 1024px) and (min-width: 769px) {
   .summary-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.875rem;
+  }
+  
+  .components-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -748,6 +838,7 @@
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1.5rem 1rem;
   }
   
   .header-info {
@@ -756,6 +847,15 @@
   
   .report-meta {
     justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .report-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  .report-subtitle {
+    font-size: 1rem;
   }
   
   .summary-grid {
@@ -780,6 +880,24 @@
   .report-footer {
     flex-direction: column;
     gap: 2rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .report-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .logo-icon {
+    font-size: 2rem;
+    padding: 0.75rem;
+  }
+  
+  .logo-text h2 {
+    font-size: 1.2rem;
+  }
+  
+  .logo-text p {
+    font-size: 0.8rem;
   }
 }
 
@@ -1228,29 +1346,73 @@
   color: #10b981;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
+/* Estilos para tablets */
+@media (max-width: 1024px) {
   .app {
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .wizard-sidebar {
+    width: 250px;
+    max-width: 250px;
+  }
+  
+  .main-form-content {
+    width: calc(100% - 270px);
+    max-width: calc(100% - 270px);
+    margin-left: 270px;
+    padding: 1.25rem;
+  }
+  
+  .institutional-header {
+    margin-left: 270px;
+  }
+  
+  .header-content {
+    max-width: calc(100vw - 310px);
+  }
+  
+  .institutional-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .institutional-info h2 {
+    font-size: 1.1rem;
+  }
+  
+  .institutional-info h3 {
+    font-size: 0.95rem;
   }
   
   .evaluation-table {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* Responsive design para tablets pequeños y móviles grandes */
+@media (max-width: 768px) {
+  .app {
+    padding: 0;
+  }
+  
+  .evaluation-table {
+    font-size: 0.75rem;
   }
   
   .parametro-cell {
     writing-mode: horizontal-tb;
     text-orientation: initial;
     width: auto;
+    padding: 8px;
   }
   
   .indicador-cell {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
   .wizard-navigation {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .wizard-step {
@@ -1262,6 +1424,11 @@
     flex-direction: column;
     gap: 1rem;
   }
+  
+  .btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
 
   .resumen-container {
     grid-template-columns: 1fr;
@@ -1269,7 +1436,8 @@
   
   .institutional-header {
     margin-left: 0;
-    margin-top: 200px;
+    padding: 1rem 0;
+    margin-top: 0;
   }
   
   .header-content {
@@ -1277,27 +1445,32 @@
     gap: 1rem;
     text-align: center;
     max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .main-content {
+    padding-top: 70px;
   }
   
   .institutional-info h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   
   .institutional-info h2 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   
   .institutional-info h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .institutional-info h4 {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   
   .institutional-logo {
-    max-height: 80px;
-    max-width: 80px;
+    max-height: 90px;
+    max-width: 90px;
   }
   
   .eagle-emblem {
@@ -1321,32 +1494,58 @@
   
   .wizard-sidebar {
     position: fixed;
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    width: auto;
-    max-width: calc(100vw - 2rem);
-    height: calc(100vh - 2rem);
-    z-index: 100;
-    padding: 0.75rem;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    max-width: 80vw;
+    height: 100vh;
+    z-index: 9998;
+    padding: 1rem;
+    overflow-y: auto;
     overflow-x: hidden;
     box-sizing: border-box;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .wizard-sidebar.mobile-open {
+    left: 0;
+  }
+  
+  .main-content {
+    padding: 0;
   }
   
   .main-form-content {
     margin-left: 0;
-    margin-top: 200px;
     padding: 1rem;
     width: 100%;
     max-width: 100%;
+    border-radius: 0;
   }
   
   .evaluation-table {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .evaluation-table thead th {
+    padding: 8px 4px;
+    font-size: 0.7rem;
   }
   
   .evaluation-table td {
     padding: 6px 4px;
+  }
+  
+  .datos-cell input {
+    width: 50px;
+    padding: 3px;
+    font-size: 0.75rem;
+  }
+  
+  .evaluacion-select {
+    font-size: 0.75rem;
+    padding: 6px 8px;
   }
   
   .parametro-col,
@@ -1356,24 +1555,110 @@
   .total-col {
     min-width: 60px;
   }
+  
+  .components-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .simulation-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .simulation-content h2 {
+    font-size: 2rem;
+  }
+  
+  .simulation-content p {
+    font-size: 1rem;
+  }
+  
+  .mobile-menu-btn {
+    display: flex !important;
+    animation: pulse-btn 2s ease-in-out infinite;
+    z-index: 9999;
+  }
+  
+  .mobile-overlay {
+    display: block;
+  }
+  
+  .institutional-header {
+    z-index: 10;
+  }
+  
+  .wizard-content {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formulario-section {
+    margin-bottom: 2rem;
+  }
+  
+  .subsection {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Ajustes para el resumen en móviles */
+  .executive-summary {
+    margin-bottom: 2rem;
+  }
+  
+  .components-analysis {
+    margin-bottom: 2rem;
+  }
+  
+  .performance-chart {
+    margin-bottom: 2rem;
+  }
+  
+  .chart-container {
+    padding: 1.5rem;
+  }
+  
+  .bar-label {
+    width: 80px;
+    font-size: 0.85rem;
+  }
+  
+  .assessment-results {
+    gap: 1.5rem;
+  }
 }
 
 /* Estilos para pantallas muy pequeñas */
 @media (max-width: 480px) {
   .main-content {
-    padding: 0 0.5rem;
+    padding: 0;
   }
   
   .main-form-content {
     padding: 0.75rem;
+    border-radius: 0;
   }
   
   .evaluation-table {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
+  }
+  
+  .evaluation-table thead th {
+    padding: 6px 3px;
+    font-size: 0.65rem;
   }
   
   .evaluation-table td {
-    padding: 4px 2px;
+    padding: 5px 3px;
+  }
+  
+  .datos-cell input {
+    width: 45px;
+    padding: 2px;
+    font-size: 0.7rem;
+  }
+  
+  .evaluacion-select {
+    font-size: 0.7rem;
+    padding: 4px 6px;
   }
   
   .parametro-col,
@@ -1385,31 +1670,253 @@
   }
   
   .wizard-sidebar {
-    position: fixed;
-    top: 0.5rem;
-    left: 0.5rem;
-    right: 0.5rem;
-    width: auto;
-    max-width: calc(100vw - 1rem);
-    height: calc(100vh - 1rem);
-    z-index: 100;
-    padding: 0.5rem;
-    overflow-x: hidden;
-    box-sizing: border-box;
+    max-width: 85vw;
   }
   
-  .institutional-header {
-    margin-left: 0;
-    margin-top: 150px;
+  .institutional-info h1 {
+    font-size: 1.1rem;
   }
   
-  .main-form-content {
-    margin-left: 0;
-    margin-top: 150px;
+  .institutional-info h2 {
+    font-size: 0.85rem;
+  }
+  
+  .institutional-info h3 {
+    font-size: 0.75rem;
+  }
+  
+  .institutional-info h4 {
+    font-size: 0.7rem;
+  }
+  
+  .institutional-logo {
+    max-height: 70px;
+    max-width: 70px;
+  }
+  
+  .wizard-controls {
+    padding: 1rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1rem;
     padding: 0.75rem;
-    width: 100%;
-    max-width: 100%;
   }
+  
+  .subsection-title {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+  
+  .simulation-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .simulation-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .simulation-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .simulate-button {
+    padding: 0.875rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .summary-grid {
+    gap: 1rem;
+  }
+  
+  .card-value {
+    font-size: 1.3rem;
+  }
+  
+  .result-value {
+    font-size: 2rem;
+  }
+  
+  .result-item.final .result-value {
+    font-size: 2.5rem;
+  }
+  
+  .main-content {
+    padding-top: 60px;
+  }
+  
+  .chart-container {
+    padding: 1rem;
+  }
+  
+  .bar-label {
+    width: 70px;
+    font-size: 0.75rem;
+  }
+  
+  .bar-value {
+    font-size: 0.8rem;
+  }
+  
+  .component-section {
+    padding: 1rem;
+  }
+  
+  .section-header {
+    flex-wrap: wrap;
+  }
+  
+  .section-icon {
+    font-size: 1.5rem;
+  }
+  
+  .section-info h4 {
+    font-size: 1rem;
+  }
+  
+  .section-info p {
+    font-size: 0.8rem;
+  }
+  
+  .section-score {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .breakdown-item {
+    font-size: 0.8rem;
+  }
+  
+  .mobile-menu-btn {
+    display: flex !important;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.625rem;
+    min-width: 55px;
+    z-index: 9999;
+  }
+  
+  .hamburger-icon {
+    width: 20px;
+    gap: 3px;
+  }
+  
+  .hamburger-icon span {
+    height: 2.5px;
+  }
+  
+  .menu-btn-text {
+    font-size: 0.6rem;
+  }
+}
+
+/* Botón menú hamburguesa para móviles */
+.mobile-menu-btn {
+  display: none; /* Se mostrará solo en móviles */
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  background: #1e40af;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 60px;
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+
+@keyframes pulse-btn {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.6);
+  }
+}
+
+.mobile-menu-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+  animation: none;
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
+}
+
+.mobile-menu-btn.active {
+  animation: none;
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+  align-items: center;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-btn-text {
+  font-size: 0.65rem;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mobile-menu-btn.active .hamburger-icon span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.mobile-menu-btn.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .hamburger-icon span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* Overlay para cerrar el menú móvil */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9997;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
 }
 
 /* Estilos para el panel de simulación */

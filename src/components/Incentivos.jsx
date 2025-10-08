@@ -32,7 +32,7 @@ const Incentivos = ({
                 <td className="datos-cell">
                   <input
                     type="number"
-                    value={item.cantidad}
+                    value={item.cantidad || ''}
                     onChange={(e) => handleIncentivosChange(item.id, 'cantidad', e.target.value)}
                     min="0"
                     step="1"
@@ -51,6 +51,8 @@ const Incentivos = ({
           </tbody>
         </table>
       </div>
+      
+      <p className="table-note">Los incentivos se sumarán a la evaluación únicamente si el servidor policial no registra sanciones</p>
     </div>
   );
 };

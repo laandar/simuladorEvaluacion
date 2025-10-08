@@ -14,7 +14,7 @@ const NormasDisciplinarias = ({
           <thead>
             <tr>
               <th className="parametro-col">PARÁMETRO</th>
-              <th className="indicador-col">INDICADOR</th>
+              <th className="indicador-col">SANCIÓN</th>
               <th className="datos-col">DATOS</th>
               <th className="nota-col">NOTA</th>
               <th className="total-col">TOTAL</th>
@@ -32,7 +32,7 @@ const NormasDisciplinarias = ({
                 <td className="datos-cell">
                   <input
                     type="number"
-                    value={item.datos}
+                    value={item.datos || ''}
                     onChange={(e) => handleNormasDisciplinariasChange(item.id, 'datos', e.target.value)}
                     min="0"
                     step="0.01"
@@ -51,6 +51,8 @@ const NormasDisciplinarias = ({
           </tbody>
         </table>
       </div>
+      
+      <p className="table-note">Registro del tipo de sanción</p>
     </div>
   );
 };
