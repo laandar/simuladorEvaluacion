@@ -2127,8 +2127,8 @@ input[type="number"] {
   gap: 0.75rem;
 }
 
-.export-excel-button {
-  background: #10b981;
+.export-pdf-button {
+  background: #dc2626;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -2137,13 +2137,13 @@ input[type="number"] {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
 }
 
-.export-excel-button:hover {
-  background: #059669;
+.export-pdf-button:hover {
+  background: #b91c1c;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
 }
 
 .reset-button {
@@ -2174,7 +2174,7 @@ input[type="number"] {
     flex-direction: column;
   }
 
-  .export-excel-button,
+  .export-pdf-button,
   .reset-button {
     width: 100%;
   }

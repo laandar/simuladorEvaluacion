@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { exportarEvaluacionAExcel } from '../utils/exportToExcel';
+import { exportarEvaluacionAPDF } from '../utils/exportToPDF';
 
 const Resumen = ({ 
   total,
@@ -46,7 +46,7 @@ const Resumen = ({
     setMostrarResumen(true);
   };
 
-  const handleExportarExcel = () => {
+  const handleExportarPDF = async () => {
     const datosExportacion = {
       indicadores,
       rendimientoIndividual,
@@ -69,7 +69,7 @@ const Resumen = ({
       }
     };
     
-    exportarEvaluacionAExcel(datosExportacion);
+    await exportarEvaluacionAPDF(datosExportacion);
   };
 
   return (
@@ -94,10 +94,10 @@ const Resumen = ({
               <h2>📋 Reporte de Evaluación Generado</h2>
               <div className="simulation-header-buttons">
                 <button 
-                  className="export-excel-button"
-                  onClick={handleExportarExcel}
+                  className="export-pdf-button"
+                  onClick={handleExportarPDF}
                 >
-                  📊 Descargar Excel
+                  📄 Descargar PDF
                 </button>
                 <button 
                   className="reset-button"
