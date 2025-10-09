@@ -2136,3 +2136,120 @@ input[type="number"] {
   background: #4b5563;
   transform: translateY(-2px);
 }
+
+/* Estilos para el componente de Normativa compacto */
+.normativa-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+  padding: 2rem;
+}
+
+.normativa-content-compact {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e5e7eb;
+}
+
+.normativa-header-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.normativa-icon-compact {
+  font-size: 2rem;
+}
+
+.normativa-header-compact h3 {
+  color: #1e40af;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.normativa-text {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.normativa-button-compact {
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+  width: 100%;
+}
+
+.normativa-button-compact:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+}
+
+.normativa-button-compact:active {
+  transform: translateY(0px);
+}
+
+/* Responsive para Normativa compacta */
+@media (max-width: 768px) {
+  .normativa-container {
+    padding: 1rem;
+  }
+
+  .normativa-content-compact {
+    padding: 1.5rem;
+  }
+
+  .normativa-header-compact h3 {
+    font-size: 1.1rem;
+  }
+
+  .normativa-text {
+    font-size: 0.9rem;
+  }
+
+  .normativa-button-compact {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .normativa-content-compact {
+    padding: 1.25rem;
+  }
+
+  .normativa-icon-compact {
+    font-size: 1.5rem;
+  }
+
+  .normativa-header-compact h3 {
+    font-size: 1rem;
+  }
+
+  .normativa-text {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .normativa-button-compact {
+    font-size: 0.9rem;
+    padding: 0.625rem 1rem;
+  }
+}

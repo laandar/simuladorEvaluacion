@@ -6,11 +6,15 @@ import NormasDisciplinarias from './components/NormasDisciplinarias'
 import AptitudesFisicas from './components/AptitudesFisicas'
 import Incentivos from './components/Incentivos'
 import Resumen from './components/Resumen'
+import Normativa from './components/Normativa'
 import { calcularNotasResponsabilidad, calcularTotalResponsabilidad, calcularPuntuacionRendimiento, calcularNotasGestionColectiva, calcularNotasFormacionProfesional, calcularNotaIndividualConducta, calcularTotalConductaPolicialConFormula, calcularPuntuacionCompetencias, calcularPuntuacionFisica, calcularPuntuacionIncentivo, calcularTotalIncentivosComplejo } from './utils/calculosResponsabilidad'
 
 function App() {
   const [pasoActual, setPasoActual] = useState(1);
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+  
+  // Link de Google Drive para la normativa (puedes cambiarlo por el link real)
+  const linkNormativa = 'https://drive.google.com/drive/folders/1kiDtMPLpU2zm7_H_svnhHE_G8ceA9abu?usp=sharing';
 
   // Controlar el scroll del body cuando el menú móvil está abierto
   useEffect(() => {
@@ -36,7 +40,7 @@ function App() {
     { id: 8, nombre: 'Contravención de tránsito con vehículo policial asignado', datos: '', nota: 0 },
     { id: 9, nombre: 'Control y cuidado de equipo en dotación', datos: '', nota: 0 },
     { id: 10, nombre: 'Control y cuidado de infraestructura policial', datos: '', nota: 0 },
-    { id: 11, nombre: 'Cumplimiento de actividaddes en el siipne', datos: '', nota: 0 },
+    { id: 11, nombre: 'Cumplimiento de actividades en el siipne', datos: '', nota: 0 },
     { id: 12, nombre: 'Detención', datos: '', nota: 0 },
     { id: 13, nombre: 'Días laborados (365-)', datos: '', nota: 0 },
     { id: 14, nombre: 'Impedimento de ejercicio profesional', datos: '', nota: 0 },
@@ -260,7 +264,8 @@ function App() {
     { id: 3, titulo: 'Normas Disciplinarias', descripcion: 'Conducta Policial' },
     { id: 4, titulo: 'Aptitudes Físicas', descripcion: 'Competencias y Físicas' },
     { id: 5, titulo: 'Incentivos', descripcion: 'Reconocimientos y Logros' },
-    { id: 6, titulo: 'Resumen', descripcion: 'Revisión Final' }
+    { id: 6, titulo: 'Resumen', descripcion: 'Revisión Final' },
+    { id: 7, titulo: 'Normativa', descripcion: 'Documentación Legal' }
   ];
 
   const siguientePaso = () => {
@@ -350,6 +355,12 @@ function App() {
             totalAptitudesFisicas={totalAptitudesFisicas}
             totalIncentivos={totalIncentivos}
             aptitudesFisicas={aptitudesFisicas}
+          />
+        );
+      case 7:
+        return (
+          <Normativa
+            linkNormativa={linkNormativa}
           />
         );
       default:
@@ -457,9 +468,9 @@ function App() {
                   Siguiente →
                 </button>
               ) : (
-                <button className="btn btn-success">
-                  Finalizar Evaluación
-        </button>
+                <button className="btn btn-success" onClick={() => window.location.reload()}>
+                  🔄 Nueva Evaluación
+                </button>
               )}
             </div>
           </div>
