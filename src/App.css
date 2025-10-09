@@ -2112,12 +2112,38 @@ input[type="number"] {
   margin-bottom: 2rem;
   padding: 1rem 0;
   border-bottom: 2px solid #e5e7eb;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .simulation-header h2 {
   color: #1e40af;
   margin: 0;
   font-size: 1.8rem;
+}
+
+.simulation-header-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.export-excel-button {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.export-excel-button:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
 }
 
 .reset-button {
@@ -2135,6 +2161,23 @@ input[type="number"] {
 .reset-button:hover {
   background: #4b5563;
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .simulation-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .simulation-header-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .export-excel-button,
+  .reset-button {
+    width: 100%;
+  }
 }
 
 /* Estilos para el componente de Normativa compacto */

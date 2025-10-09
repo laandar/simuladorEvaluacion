@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { exportarEvaluacionAExcel } from '../utils/exportToExcel';
 
 const Resumen = ({ 
   total,
@@ -8,13 +9,20 @@ const Resumen = ({
   totalNormasDisciplinarias,
   totalAptitudesFisicas,
   totalIncentivos,
-  aptitudesFisicas
+  aptitudesFisicas,
+  indicadores,
+  rendimientoIndividual,
+  gestionColectiva,
+  formacionProfesional,
+  normasDisciplinarias,
+  incentivos
 }) => {
   const [mostrarResumen, setMostrarResumen] = useState(false);
   
   const totalResultadosGestion = total + totalRendimiento + totalGestionColectiva;
   const totalGeneral = totalResultadosGestion + totalFormacionProfesional + totalNormasDisciplinarias + totalAptitudesFisicas + totalIncentivos;
-  const notaFinal = (totalGeneral * 0.2).toFixed(2); // 20% del total general
+  const notaFinalCalculada = totalGeneral * 0.2;
+  const notaFinal = Math.min(20, notaFinalCalculada).toFixed(2); // Límite máximo de 20 puntos
 
   // Función para determinar la categoría basada en la nota final
   // Escala: 0-20 puntos, clasificación según tabla oficial
@@ -38,6 +46,32 @@ const Resumen = ({
     setMostrarResumen(true);
   };
 
+  const handleExportarExcel = () => {
+    const datosExportacion = {
+      indicadores,
+      rendimientoIndividual,
+      gestionColectiva,
+      formacionProfesional,
+      normasDisciplinarias,
+      aptitudesFisicas,
+      incentivos,
+      totales: {
+        responsabilidad: total,
+        rendimiento: totalRendimiento,
+        gestionColectiva: totalGestionColectiva,
+        formacionProfesional: totalFormacionProfesional,
+        normasDisciplinarias: totalNormasDisciplinarias,
+        aptitudesFisicas: totalAptitudesFisicas,
+        incentivos: totalIncentivos,
+        totalGeneral: totalGeneral,
+        notaFinal: notaFinal,
+        clasificacion: categoriaFinal.lista
+      }
+    };
+    
+    exportarEvaluacionAExcel(datosExportacion);
+  };
+
   return (
     <div className="executive-report">
       <div className="report-content">
@@ -58,12 +92,20 @@ const Resumen = ({
           <>
             <div className="simulation-header">
               <h2>📋 Reporte de Evaluación Generado</h2>
-              <button 
-                className="reset-button"
-                onClick={() => setMostrarResumen(false)}
-              >
-                🔄 Nueva Simulación
-              </button>
+              <div className="simulation-header-buttons">
+                <button 
+                  className="export-excel-button"
+                  onClick={handleExportarExcel}
+                >
+                  📊 Descargar Excel
+                </button>
+                <button 
+                  className="reset-button"
+                  onClick={() => setMostrarResumen(false)}
+                >
+                  🔄 Nueva Simulación
+                </button>
+              </div>
             </div>
             <div className="executive-summary">
           <h3>📊 RESUMEN EJECUTIVO</h3>

@@ -355,6 +355,12 @@ function App() {
             totalAptitudesFisicas={totalAptitudesFisicas}
             totalIncentivos={totalIncentivos}
             aptitudesFisicas={aptitudesFisicas}
+            indicadores={indicadores}
+            rendimientoIndividual={rendimientoIndividual}
+            gestionColectiva={gestionColectiva}
+            formacionProfesional={formacionProfesional}
+            normasDisciplinarias={normasDisciplinarias}
+            incentivos={incentivos}
           />
         );
       case 7:
