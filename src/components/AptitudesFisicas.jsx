@@ -4,7 +4,8 @@ const AptitudesFisicas = ({
   aptitudesFisicas,
   handleAptitudesFisicasChange,
   totalAptitudesFisicas,
-  opcionesEvaluacion
+  opcionesEvaluacion,
+  equipoEnDotacion
 }) => {
   return (
     <div className="formulario-section">
@@ -44,11 +45,20 @@ const AptitudesFisicas = ({
                         className="evaluacion-select"
                       >
                         <option value="">Seleccione una opción</option>
-                        {opcionesEvaluacion.map(opcion => (
-                          <option key={opcion.valor} value={opcion.valor}>
-                            {opcion.valor}
-                          </option>
-                        ))}
+                        {opcionesEvaluacion
+                          .filter(opcion => {
+                            // Si el indicador es "Responsabilidad" y equipoEnDotacion es "NO", excluir "SIEMPRE"
+                            if (item.indicador === 'Responsabilidad' && equipoEnDotacion === 'NO') {
+                              return opcion.valor !== 'SIEMPRE';
+                            }
+                            return true;
+                          })
+                          .map(opcion => (
+                            <option key={opcion.valor} value={opcion.valor}>
+                              {opcion.valor}
+                            </option>
+                          ))
+                        }
                       </select>
                     </td>
                     <td className="puntuacion-cell">

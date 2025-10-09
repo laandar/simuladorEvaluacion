@@ -36,7 +36,7 @@ function App() {
     { id: 8, nombre: 'Contravención de tránsito con vehículo policial asignado', datos: '', nota: 0 },
     { id: 9, nombre: 'Control y cuidado de equipo en dotación', datos: '', nota: 0 },
     { id: 10, nombre: 'Control y cuidado de infraestructura policial', datos: '', nota: 0 },
-    { id: 11, nombre: 'Cumplimiento de actividad des en el siipne', datos: '', nota: 0 },
+    { id: 11, nombre: 'Cumplimiento de actividaddes en el siipne', datos: '', nota: 0 },
     { id: 12, nombre: 'Detención', datos: '', nota: 0 },
     { id: 13, nombre: 'Días laborados (365-)', datos: '', nota: 0 },
     { id: 14, nombre: 'Impedimento de ejercicio profesional', datos: '', nota: 0 },
@@ -115,7 +115,13 @@ function App() {
   const handleDatosChange = (id, value) => {
     const newIndicadores = indicadores.map(ind => {
       if (ind.id === id) {
-        const datos = value === '' ? '' : parseInt(value) || 0;
+        // Caso especial para equipo en dotación (ID: 9) que acepta SI/NO
+        let datos;
+        if (id === 9) {
+          datos = value; // Mantener el valor de texto (SI/NO)
+        } else {
+          datos = value === '' ? '' : parseInt(value) || 0;
+        }
         const nota = calcularNotasResponsabilidad(id, datos, indicadores);
         return { ...ind, datos, nota };
       }
@@ -123,6 +129,14 @@ function App() {
     });
     
     setIndicadores(newIndicadores);
+
+    // Si se cambió equipo en dotación a "NO", resetear "SIEMPRE" en Responsabilidad
+    if (id === 9 && value === 'NO') {
+      const aptitudResponsabilidad = aptitudesFisicas.find(apt => apt.indicador === 'Responsabilidad');
+      if (aptitudResponsabilidad && aptitudResponsabilidad.evaluacion === 'SIEMPRE') {
+        handleAptitudesFisicasChange(aptitudResponsabilidad.id, 'evaluacion', '');
+      }
+    }
   };
 
   const handleEvaluacionChange = (id, evaluacion) => {
@@ -314,6 +328,7 @@ function App() {
             handleAptitudesFisicasChange={handleAptitudesFisicasChange}
             totalAptitudesFisicas={totalAptitudesFisicas}
             opcionesEvaluacion={opcionesEvaluacion}
+            equipoEnDotacion={indicadores.find(ind => ind.id === 9)?.datos || ''}
           />
         );
       case 5:

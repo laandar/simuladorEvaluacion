@@ -29,28 +29,31 @@ export const MULTIPLICADORES = {
 export const LIMITE_MAXIMO = -20;
 
 // Configuración para Control y cuidado de equipo en dotación (ID: 9)
-// Se calcula basado en su propio valor de datos ingresado
+// Se calcula basado en SI/NO: SI = 0, NO = -10
 export const EQUIPO_DOTACION_CONFIG = {
-  1: -2,
-  2: -4,
-  3: -6,
-  4: -8,
-  5: -10,
-  "NO PRESENTO": -10,
+  'SI': 0,
+  'NO': -10,
   default: 0
 };
 
 
 // Función principal para calcular las notas de responsabilidad
 export const calcularNotasResponsabilidad = (id, datos, indicadores = []) => {
-  const datosNum = parseInt(datos) || 0;
   let nota = 0;
+
+  // Caso especial para equipo en dotación (ID: 9) que acepta SI/NO
+  if (id === 9) {
+    nota = EQUIPO_DOTACION_CONFIG[datos] !== undefined ? EQUIPO_DOTACION_CONFIG[datos] : EQUIPO_DOTACION_CONFIG.default;
+    return nota;
+  }
+
+  const datosNum = parseInt(datos) || 0;
 
   if (datosNum > 0) {
     switch (id) {
-      case 9: // Control y cuidado de equipo en dotación
-        // Fórmula: SI(F20=1;-2;SI(Y(F20=2);-4;SI(Y(F20=3);-6;SI(Y(F20=4);-8;SI(Y(F20=5);-10;SI(Y(F20="NO PRESENTO");-10;0))))))
-        nota = EQUIPO_DOTACION_CONFIG[datosNum] || EQUIPO_DOTACION_CONFIG.default;
+      case 6: // Ausencia injustificada
+        // Fórmula: datos * -5 con límite máximo de -10
+        nota = Math.max(-10, -5 * datosNum);
         break;
         
       case 13: // Días laborados (365-)
@@ -231,7 +234,6 @@ export const calcularPuntuacionIncentivo = (tipoIncentivo, cantidad) => {
 
 // Función para calcular el total de incentivos con lógica compleja
 export const calcularTotalIncentivosComplejo = (incentivos, sumaDatosConductaPolicial) => {
-  console.log('sumaDatosConductaPolicial', sumaDatosConductaPolicial);
   // Paso 1: Sumar todas las puntuaciones de incentivos
   const sumaIncentivos = incentivos.reduce((sum, item) => sum + item.puntuacion, 0);
   

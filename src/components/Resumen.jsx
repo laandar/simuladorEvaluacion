@@ -16,6 +16,24 @@ const Resumen = ({
   const totalGeneral = totalResultadosGestion + totalFormacionProfesional + totalNormasDisciplinarias + totalAptitudesFisicas + totalIncentivos;
   const notaFinal = (totalGeneral * 0.2).toFixed(2); // 20% del total general
 
+  // Función para determinar la categoría basada en la nota final
+  // Escala: 0-20 puntos, clasificación según tabla oficial
+  const determinarCategoria = (nota) => {
+    const notaNum = parseFloat(nota);
+    
+    if (notaNum >= 18.0 && notaNum <= 20.0) {
+      return { lista: "Lista 1", rango: "De 18.0 a 20.0", calificacion: "Excelente" };
+    } else if (notaNum >= 16.0 && notaNum <= 17.99) {
+      return { lista: "Lista 2", rango: "De 16.0 a 17.99", calificacion: "Muy bueno" };
+    } else if (notaNum >= 14.0 && notaNum <= 15.99) {
+      return { lista: "Lista 3", rango: "De 14.0 a 15.99", calificacion: "Bueno" };
+    } else {
+      return { lista: "Cuota de Eliminación", rango: "Menor a 14.0", calificacion: "Por debajo del estándar mínimo" };
+    }
+  };
+
+  const categoriaFinal = determinarCategoria(notaFinal);
+
   const handleSimular = () => {
     setMostrarResumen(true);
   };
@@ -74,6 +92,49 @@ const Resumen = ({
                 <p>Porcentaje de Cumplimiento</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="categorization-section">
+          <h3>📊 CLASIFICACIÓN FINAL</h3>
+          <div className="categorization-compact">
+            <div className="classification-result">
+              <span className="classification-label">Categoría:</span>
+              <span className="classification-value">{categoriaFinal.lista}</span>
+              <span className="classification-grade">({categoriaFinal.calificacion})</span>
+            </div>
+            
+            <table className="reference-table-compact">
+              <thead>
+                <tr>
+                  <th>Lista</th>
+                  <th>Rango</th>
+                  <th>Calificación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className={categoriaFinal.lista === "Lista 1" ? "highlighted" : ""}>
+                  <td>Lista 1</td>
+                  <td>18.0 - 20.0</td>
+                  <td>Excelente</td>
+                </tr>
+                <tr className={categoriaFinal.lista === "Lista 2" ? "highlighted" : ""}>
+                  <td>Lista 2</td>
+                  <td>16.0 - 17.99</td>
+                  <td>Muy bueno</td>
+                </tr>
+                <tr className={categoriaFinal.lista === "Lista 3" ? "highlighted" : ""}>
+                  <td>Lista 3</td>
+                  <td>14.0 - 15.99</td>
+                  <td>Bueno</td>
+                </tr>
+                <tr className={`elimination-row ${categoriaFinal.lista === "Cuota de Eliminación" ? "highlighted" : ""}`}>
+                  <td>Cuota de Eliminación</td>
+                  <td>&lt; 14.0</td>
+                  <td>Por debajo del estándar</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 

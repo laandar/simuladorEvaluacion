@@ -18,7 +18,6 @@ const ResultadosGestion = ({
       
       {/* Responsabilidad Profesional */}
       <div className="subsection">
-        <h3 className="subsection-title">Responsabilidad Profesional y Personal / Código de Ética</h3>
         <div className="table-container">
           <table className="evaluation-table">
             <thead>
@@ -40,12 +39,24 @@ const ResultadosGestion = ({
                   )}
                   <td className="indicador-cell">{indicador.nombre}</td>
                   <td className="datos-cell">
-                    <input
-                      type="number"
-                      value={indicador.datos || ''}
-                      onChange={(e) => handleDatosChange(indicador.id, e.target.value)}
-                      min="0"
-                    />
+                    {indicador.id === 9 ? (
+                      <select
+                        value={indicador.datos || ''}
+                        onChange={(e) => handleDatosChange(indicador.id, e.target.value)}
+                        className="evaluacion-select"
+                      >
+                        <option value="">Seleccione una opción</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                      </select>
+                    ) : (
+                      <input
+                        type="number"
+                        value={indicador.datos || ''}
+                        onChange={(e) => handleDatosChange(indicador.id, e.target.value)}
+                        min="0"
+                      />
+                    )}
                   </td>
                   <td className="nota-cell">{indicador.nota.toFixed(2)}</td>
                   {index === 0 && (
