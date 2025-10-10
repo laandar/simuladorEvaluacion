@@ -16,6 +16,20 @@ function App() {
   // Link de Google Drive para la normativa (puedes cambiarlo por el link real)
   const linkNormativa = 'https://drive.google.com/drive/folders/1kiDtMPLpU2zm7_H_svnhHE_G8ceA9abu?usp=sharing';
 
+  // Función para trackear el botón "Nueva Evaluación"
+  const trackNuevaEvaluacion = () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'button_click', {
+        event_category: 'evaluation',
+        event_label: 'Nueva Evaluación',
+        event_action: 'start_simulation',
+        value: 1
+      });
+    }
+    // Recargar la página
+    window.location.reload();
+  };
+
   // Controlar el scroll del body cuando el menú móvil está abierto
   useEffect(() => {
     if (menuMobileOpen) {
@@ -474,7 +488,7 @@ function App() {
                   Siguiente →
                 </button>
               ) : (
-                <button className="btn btn-success" onClick={() => window.location.reload()}>
+                <button className="btn btn-success" onClick={trackNuevaEvaluacion}>
                   🔄 Nueva Evaluación
                 </button>
               )}
